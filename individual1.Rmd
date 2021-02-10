@@ -1,0 +1,11 @@
+---
+title: "individual1"
+author: "Ryan Herren"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+This is Ryan Herren's document for analysis on chocolate ratings.
