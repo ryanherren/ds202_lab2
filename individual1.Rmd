@@ -9,3 +9,10 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 This is Ryan Herren's document for analysis on chocolate ratings.
+
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv")
+hist(choco$Rating, main = "Histogram of Chocolate Ratings", xlab = "Rating")
+boxplot(choco$Rating, main = "Boxplot of Chocolate Ratings", ylab = "Rating")
+```
+
