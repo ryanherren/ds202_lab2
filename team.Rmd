@@ -1,0 +1,104 @@
+---
+title: "team"
+author: "Ryan Herren and Carter Meseck"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+```
+
+## R Markdown
+Question 1:
+
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv")
+hist(choco$Rating, main = "Histogram of Chocolate Ratings", xlab = "Rating")
+```
+  
+  This histogram is skew left, with most ratings being between 2.5 and 4.
+
+```{r}
+boxplot(choco$Rating, main = "Boxplot of Chocolate Ratings", ylab = "Rating")
+```
+  
+  There are a four outliers, which all come with ratings at or under 2.0
+
+Question 2:
+```{r}
+barplot(table(choco$Location), las = 2, cex.names = 0.6)
+```
+  
+  The USA has the most number of ratings by a lot. The three countries with the most ratings besides the USA are the UAE, France, and Brazil.
+  
+Question 3:
+```{r}
+cor(choco$Cocoa_Percent, choco$Rating)
+summary(choco[c("Cocoa_Percent", "Rating")])
+plot(choco$Rating, choco$Cocoa_Percent, xlab = "Rating", ylab = "Percentage of Cocoa")
+```
+  
+  From this, we conclude that there isn't a correlating between the percentage of cocoa and the rating. Notably, there is only one chocolate that has a percentage of cocoa above 80% that received a 4.0 score.
+
+Question 4:
+### Looking for which Bean_origin has a significant enough amount of counts to be useful in analysis. I am going to use the top 5, Dominican Republic, Venezuela, Ecuador, Madagascar, and Peru
+```{r}
+table(choco$Bean_Origin)
+dr <- choco[choco$Bean_Origin == 'Dominican Republic',]
+hist(dr$Rating)
+summary(dr$Rating)
+ve <- choco[choco$Bean_Origin == 'Venezuela',]
+hist(ve$Rating)
+summary(ve$Rating)
+ec <- choco[choco$Bean_Origin == 'Ecuador',]
+hist(ec$Rating)
+summary(ec$Rating)
+ma <- choco[choco$Bean_Origin == 'Madagascar',]
+hist(ma$Rating)
+summary(ma$Rating)
+pe <- choco[choco$Bean_Origin == 'Peru',]
+hist(pe$Rating)
+summary(pe$Rating)
+```
+### From looking at the summary of these five origins, they are all actually extremely close together, however, Madagascar is barely ahead in the mean by 0.041 rating. The median for these are all the same, although Dominican Republic has a max of 3.750 rating, and Madagascar has a minmum of 2.250 being the highest of these 5, and also has a max of 4.0 rating. Based off of this I personally don't think theres a big enough difference between bean origin. Also, after looking at all the histograms for frequency of their ratings, madagascar is the only of these 5 that actually has a spike in frequency in ratings at the 3.5 mark. The rest have it about at the 3.0 rating mark.
+
+Question 5:
+```{r}
+cocoa <- choco[choco$Characteristics1 == 'cocoa',]
+hist(cocoa$Rating)
+summary(dr$Rating)
+rich <- choco[choco$Characteristics1 == 'rich cocoa',]
+hist(rich$Rating)
+summary(rich$Rating)
+fruity <- choco[choco$Characteristics1 == 'fruity',]
+hist(fruity$Rating)
+summary(fruity$Rating)
+vegetal <- choco[choco$Characteristics1 == 'vegetal',]
+hist(vegetal$Rating)
+summary(vegetal$Rating)
+oily <- choco[choco$Characteristics1 == 'oily',]
+hist(oily$Rating)
+summary(oily$Rating)
+```
+### After looking at the histograms and summaries of these 5 Characteristics, it is easy to say that rich cocoa is the best characteristic in order to have a higher rating, which makes sense. The other ones are pretty much the same except for vegetal which is a bit higher than the rest but not as high as rich cocoa. 
+
+```{r}
+blackberry <- choco[choco$Characteristics2 == 'blackberry',]
+hist(blackberry$Rating)
+summary(blackberry$Rating)
+vegetal <- choco[choco$Characteristics2 == 'vegetal',]
+hist(vegetal$Rating)
+summary(vegetal$Rating)
+fatty <- choco[choco$Characteristics2 == 'fatty',]
+hist(fatty$Rating)
+summary(fatty$Rating)
+melon <- choco[choco$Characteristics2 == 'melon',]
+hist(melon$Rating)
+summary(melon$Rating)
+nutty <- choco[choco$Characteristics2 == 'nutty',]
+hist(nutty$Rating)
+summary(nutty$Rating)
+```
+### After looking at the histograms and summary for these characteristics, it shows that blackberry has the highest mean. However, blackberry also has the lowest amount of counts of data on this list, so I would take it with a grain of salt. I would actually say Melon surprisingly is the best characteristic out of these, with a mean rating .250 above the rest (besides blackberry). 
+

@@ -6,6 +6,7 @@ output: html_document
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
 ```
 
 This is Ryan Herren's document for analysis on chocolate ratings.
@@ -13,6 +14,26 @@ This is Ryan Herren's document for analysis on chocolate ratings.
 ```{r}
 choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv")
 hist(choco$Rating, main = "Histogram of Chocolate Ratings", xlab = "Rating")
+```
+  
+  This histogram is skew left, with most ratings being between 2.5 and 4.
+
+```{r}
 boxplot(choco$Rating, main = "Boxplot of Chocolate Ratings", ylab = "Rating")
 ```
+  
+  There are a four outliers, which all come with ratings at or under 2.0
+
+```{r}
+barplot(table(choco$Location), las = 2, cex.names = 0.6)
+```
+  
+  The USA has the most number of ratings by a lot. The three countries with the most ratings besides the USA are the UAE, France, and Brazil.
+```{r}
+cor(choco$Cocoa_Percent, choco$Rating)
+summary(choco[c("Cocoa_Percent", "Rating")])
+plot(choco$Rating, choco$Cocoa_Percent, xlab = "Rating", ylab = "Percentage of Cocoa")
+```
+  
+  From this, we conclude that there isn't a correlating between the percentage of cocoa and the rating. Notably, there is only one chocolate that has a percentage of cocoa above 80% that received a 4.0 score.
 
