@@ -1,18 +1,121 @@
 ---
 title: "R Notebook"
 output: html_notebook
+
+
+
 ---
 
-This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
-
-Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
-
 ```{r}
-plot(cars)
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv") 
+str(choco) 
+library(ggplot2)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+```{r}
+ggplot(choco, aes(x=Location, weight=Rating)) + geom_bar()
+### 3. We can see that location does make a difference in the number of ratings.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
 
-The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
+```
+
+```{r}
+library(ggplot2)
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv") 
+str(choco)
+table(choco$Bean_Origin)
+### Looking for which Bean_origin has a significant enough amount of counts to be useful in analysis. I am going to use the top 5, Dominican Republic, Venezuela, Ecuador, Madagascar, and Peru
+
+dr <- choco[choco$Bean_Origin == 'Dominican Republic',]
+hist(dr$Rating)
+summary(dr$Rating)
+
+ve <- choco[choco$Bean_Origin == 'Venezuela',]
+hist(ve$Rating)
+summary(ve$Rating)
+
+ec <- choco[choco$Bean_Origin == 'Ecuador',]
+hist(ec$Rating)
+summary(ec$Rating)
+
+
+ma <- choco[choco$Bean_Origin == 'Madagascar',]
+hist(ma$Rating)
+summary(ma$Rating)
+
+pe <- choco[choco$Bean_Origin == 'Peru',]
+hist(pe$Rating)
+summary(pe$Rating)
+
+
+### From looking at the summary of these five origins, they are all actually extremely close together, however, Madagascar is barely ahead in the mean by 0.041 rating. The median for these are all the same, although Dominican Republic has a max of 3.750 rating, and Madagascar has a minmum of 2.250 being the highest of these 5, and also has a max of 4.0 rating. Based off of this I personally don't think theres a big enough difference between bean origin. Also, after looking at all the histograms for frequency of their ratings, madagascar is the only of these 5 that actually has a spike in frequency in ratings at the 3.5 mark. The rest have it about at the 3.0 rating mark.
+
+```
+
+```{r}
+library(ggplot2)
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv") 
+str(choco)
+table(choco$Characteristics1)
+head(choco$Characteristics1)
+### 5. For the first analysis, I am doing analysis on Characteristics1 to see if it makes a difference in rating.
+
+
+cocoa <- choco[choco$Characteristics1 == 'cocoa',]
+hist(cocoa$Rating)
+summary(dr$Rating)
+
+rich <- choco[choco$Characteristics1 == 'rich cocoa',]
+hist(rich$Rating)
+summary(rich$Rating)
+
+fruity <- choco[choco$Characteristics1 == 'fruity',]
+hist(fruity$Rating)
+summary(fruity$Rating)
+
+
+vegetal <- choco[choco$Characteristics1 == 'vegetal',]
+hist(vegetal$Rating)
+summary(vegetal$Rating)
+
+oily <- choco[choco$Characteristics1 == 'oily',]
+hist(oily$Rating)
+summary(oily$Rating)
+
+### After looking at the histograms and summaries of these 5 Characteristics, it is easy to say that rich cocoa is the best characteristic in order to have a higher rating, which makes sense. The other ones are pretty much the same except for vegetal which is a bit higher than the rest but not as high as rich cocoa. 
+
+
+```
+```{r}
+choco <- read.csv("https://raw.githubusercontent.com/xdaiISU/ds202materials/master/hwlabs/data/choco.csv") 
+str(choco)
+table(choco$Characteristics2)
+head(choco$Characteristics2)
+### 5. For the first analysis, I am doing analysis on Characteristics2 to see if it makes a difference in rating.
+
+
+blackberry <- choco[choco$Characteristics2 == 'blackberry',]
+hist(blackberry$Rating)
+summary(blackberry$Rating)
+
+vegetal <- choco[choco$Characteristics2 == 'vegetal',]
+hist(vegetal$Rating)
+summary(vegetal$Rating)
+
+fatty <- choco[choco$Characteristics2 == 'fatty',]
+hist(fatty$Rating)
+summary(fatty$Rating)
+
+melon <- choco[choco$Characteristics2 == 'melon',]
+hist(melon$Rating)
+summary(melon$Rating)
+
+nutty <- choco[choco$Characteristics2 == 'nutty',]
+hist(nutty$Rating)
+summary(nutty$Rating)
+
+### After looking at the histograms and summary for these characteristics, it shows that blackberry has the highest mean. However, blackberry also has the lowest amount of counts of data on this list, so I would take it with a grain of salt. I would actually say Melon surprisingly is the best characteristic out of these, with a mean rating .250 above the rest (besides blackberry). 
+
+```
+
+
